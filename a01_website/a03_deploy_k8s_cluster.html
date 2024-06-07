@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Deploy EKS Cluster</title>
+        <meta charset="UTF8">
+    </head>
+    <body>
+        <p align="center">
+            Deploy Elastic Kubernetes Cluster (EKS) Cluster on AWS Cloud Platform with Terraform IaC
+        </p>
+        <br>
+        <h2 style="color:burlywood">By clicking on the next image, your browser will redirect you to my bitbucket repository where you will find the Terraform source code</h2>
+        <a href="https://bitbucket.org/tchatua/c01_platform_code/src/master/" target="_blank"><img src="a01_pictures/Kubernetes_Cluster_Architecture.png"></a>
+        <br>
+        <!-- Content of my webpage -->
+        <p>
+            <h2>Create IAM User which I'm going to use to create EKS Cluster from Terraform Code</h2>
+            <ul>
+                <li>I'm going to AWS Management Console to create my IAM user</li>
+                <ul>
+                    <li>Navigate to **IAM dashboard**;</li>
+                    <li>Click on **Users**;</li>
+                    <li>Click on **Add users** and specify the user details (user name, Provide user access to AWS Management Console, and Password);</li>
+                    <li>Click on **Next** and **Attach policies directly**</li>
+                    <li>Let's select **AdministratorAccess** as *Permissions policies*</li>
+                    <li>Click on **Next**</li>
+                    <li>Click on **Create user** and return to the users list</li>
+                </ul>
+                    <li>Going back to my IAM user</li>
+                    <li>I want to create an **access key** and a **secret key** that I'm going to use to programmatically access the AWS</li>
+                <ul>
+                    <li>Go to **Security credentials**</li>
+                    <li>Under *Access key* click on **Create access key**, select **Command Line Interface (CLI)**, and understand the recommendation</li>
+                    <li>Click on **Next**;</li>
+                    <li>Click on **Create access key** and save those Access key and secret access key by downloading the .csv file.</li>
+                </ul>
+            </ul>
+        </p>
+        <p>
+            <h2>Configure AWSCLI</h2>
+            <ul>
+                <li>Install AWSCLI in my OS</li>
+                <li>URL: https://aws.amazon.com/cli/</li>
+                <li>Download the package on this portal and install it.</li>
+                <li>Run: **aws --version**</li>
+                <li>**Configure the access key and the secret key**:</li>
+                <li>Open the terminal and run **aws configure** command</li>
+                <li>Open the csv file to copy the access and the secret key</li>
+                <li>Display all my S3 bucket in CLI (Verify that my aws access is working) by running the cli: aws s3 ls</li>
+                <li>Display all my dynamodb by running the cli: aws dynamodb list-tables</li>
+            </ul>
+        </p>
+        <p>
+            Deploy AWS remote backend where will be store the terraform state file and the state lock file by following to my bitbucket documentation
+        </p>
+        <p>
+            <h2>Deploy *a02_eks_cluster_CODE*</h2>
+            <ul>
+                <li>In my a02_eks_cluster_CODE, I'm going to mention the S3 bucket and the Dynamodb as a backend to store my **terraform.tfstate** file</li>
+                <li>Going to the high level configuration of my code, I'm going to deploy my EKS cluster with one nodegroup called App.</li>
+                <li>This nodegroup is maintaining the autoscaling configuration with the *desired_Size = 5*, the *max_Size = 10* and the *min_Size = 5* worker nodes.</li>
+                <li>The rest of configuration as usual in the custom *vpc* and in the custom *subnets* </li>
+                <li>deployment of my eks cluster: navigate to the project_folder and run terraform commands:</li>
+                <ol>
+                    <li>$ terraform init</li>
+                    <li>$ terraform fmt</li>                
+                    <li>$ terraform validate</li>
+                    <li>$ terraform plan</li>
+                    <li>$ terraform apply -auto-approve</li>
+                </ol>
+            </ul>
+        </p>
+        <p>
+            <h2>Connect to the API server using kubectl utility by Downloading and setting up kubectl binary in Linux OS</h2>
+            <ol>
+                <li>$ curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl</li>
+                <li>$ chmod +x kubectl</li>
+                <li>$ mv kubectl /usr/local/bin/</li>
+                <li>$ kubectl version</li>
+            </ol>
+        </p>
+        <p>
+            <h2>To use kubectl to connect to my EKS cluster, I need to generate the client side certification which is the kubeconfig file:</h2>
+            <ol>
+                <li>$ aws eks update-kubeconfig --name <<Cluster_Name>> --region <<Region>></li>
+                <li>$ aws eks update-kubeconfig --name ed-eks-01 --region us-east-1</li>
+                <li>$ kubectl get nodes</li>
+                <li>$ kubectl get nodes</li>
+            </ol>
+        </p>
+    </body>
+</html>
