@@ -9,35 +9,48 @@
                 font-family: Arial, Helvetica, sans-serif;
                 margin: 0;
             }
-            p.category {
-                background-color: black;
-                color: white;
-                display: inline-block;
-            }
             p.description {
                 text-align: center;
                 max-width: 600px;
                 display: inline-block;
 
             }
-            div.description {
+            div.center {
                 text-align: center;
                 /* background-color: rgb(215, 215, 219); */
             }
             div.container {
                 background-color: white;
-                margin: 60% 10% 80% 10%;
+                margin: 0% 10% 10% 10%;
                 padding: 30px;
             }
             h1 {
                 text-align: center;
             }
+            p.category {
+                background-color: black;
+                color: white;
+                display: inline-block;
+                margin-left: 30px;
+                margin-top: 0px;
+                padding: 8px 18px;
+                margin-bottom: 0px;
+                font-weight: bold;
+                font-size: 32px;
+            }
+            div.category {
+                margin-bottom: -20px;
+                margin-top: 60px;
+            }
         </style>
     </head>
     <body>
+        
+        <div class="center category">
+            <p class="category">Deploy</p>
+        </div>
         <div class="container">
             <h1>
-                <p class="category";>Deploy</p>
                 <p>Elastic Kubernetes Cluster (EKS) Cluster on AWS Cloud Platform with Terraform IaC</p>
             </h1>
 
@@ -53,7 +66,7 @@
 
             <!-- Content of my webpage -->
             <br>
-            <div class="description">
+            <div class="center">
                 <p style="color:rgb(51, 26, 2)", class="description">By clicking on the next image, your browser will redirect you to my bitbucket repository where you will find the Terraform source code</p>
             </div>
             <a href="https://bitbucket.org/tchatua/c01_platform_code/src/master/" target="_blank"><img src="a01_pictures/Kubernetes_Cluster_Architecture.png"></a>
